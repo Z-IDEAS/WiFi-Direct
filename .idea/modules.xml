@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/WiFiDirectDemo.iml" filepath="$PROJECT_DIR$/WiFiDirectDemo.iml" />
+      <module fileurl="file://$PROJECT_DIR$/WiFi-Direct.iml" filepath="$PROJECT_DIR$/WiFi-Direct.iml" />
     </modules>
   </component>
 </project>

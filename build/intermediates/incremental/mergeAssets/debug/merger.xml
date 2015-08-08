@@ -1,2 +1,2 @@
 <?xml version="1.0" encoding="utf-8"?>
-<merger version="3"><dataSet config="main"><source path="D:\Program\AndroidStudio\SDK\samples\android-16\WiFiDirectDemo\assets"><file name="sample_file.txt" path="D:\Program\AndroidStudio\SDK\samples\android-16\WiFiDirectDemo\assets\sample_file.txt"/></source></dataSet><dataSet config="debug"><source path="D:\Program\AndroidStudio\SDK\samples\android-16\WiFiDirectDemo\build-types\debug\assets"/></dataSet></merger>
+<merger version="3"><dataSet config="main"><source path="E:\WiFi-Direct\assets"><file name="sample_file.txt" path="E:\WiFi-Direct\assets\sample_file.txt"/></source></dataSet><dataSet config="debug"><source path="E:\WiFi-Direct\build-types\debug\assets"/></dataSet></merger>

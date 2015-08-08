@@ -75,9 +75,15 @@ category#android.intent.category.LAUNCHER
 ADDED from AndroidManifest.xml:27:17
 	android:name
 		ADDED from AndroidManifest.xml:28:21
-service#com.example.android.wifidirect.FileTransferService
-ADDED from AndroidManifest.xml:33:9
-	android:enabled
-		ADDED from AndroidManifest.xml:33:18
+activity#com.example.android.wifidirect.ChatActivity
+ADDED from AndroidManifest.xml:31:9
+	android:label
+		ADDED from AndroidManifest.xml:33:17
 	android:name
-		ADDED from AndroidManifest.xml:33:41
+		ADDED from AndroidManifest.xml:32:17
+service#com.example.android.wifidirect.FileTransferService
+ADDED from AndroidManifest.xml:37:9
+	android:enabled
+		ADDED from AndroidManifest.xml:37:18
+	android:name
+		ADDED from AndroidManifest.xml:37:41

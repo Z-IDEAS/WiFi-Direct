@@ -30,4 +30,4 @@
             android:singleLine="true"
             android:ellipsize="marquee" />
     </LinearLayout>
-</LinearLayout><!-- From: file:/D:/Program/AndroidStudio/SDK/samples/android-16/WiFiDirectDemo/res/layout/row_devices.xml -->
+</LinearLayout><!-- From: file:/E:/WiFi-Direct/res/layout/row_devices.xml -->

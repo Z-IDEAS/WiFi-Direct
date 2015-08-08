@@ -32,6 +32,12 @@
                 android:layout_height="wrap_content"
                 android:text="@string/get_file_button"
                 android:visibility="gone" />
+            <Button
+                android:id="@+id/btn_start_chat"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Chat"
+                android:visibility="gone"/>
         </LinearLayout>
         <TextView
             android:id="@+id/device_address"
@@ -68,4 +74,4 @@
         </TextView>
     </LinearLayout>
 </FrameLayout>
-<!-- From: file:/D:/Program/AndroidStudio/SDK/samples/android-16/WiFiDirectDemo/res/layout/device_detail.xml -->
+<!-- From: file:/E:/WiFi-Direct/res/layout/device_detail.xml -->

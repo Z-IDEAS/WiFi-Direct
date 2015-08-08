@@ -19,7 +19,6 @@ package com.example.android.wifidirect;
 import android.app.Fragment;
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.net.wifi.WpsInfo;
@@ -51,7 +50,6 @@ import java.net.Socket;
  * i.e. setting up network connection and transferring data.
  */
 public class DeviceDetailFragment extends Fragment implements ConnectionInfoListener {
-
     protected static final int CHOOSE_FILE_RESULT_CODE = 20;
     private View mContentView = null;
     private WifiP2pDevice device;
@@ -113,6 +111,14 @@ public class DeviceDetailFragment extends Fragment implements ConnectionInfoList
                         startActivityForResult(intent, CHOOSE_FILE_RESULT_CODE);
                     }
                 });
+        mContentView.findViewById(R.id.btn_start_chat).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), ChatActivity.class);
+                intent.putExtra("info", info);
+                startActivity(intent);
+            }
+        });
 
         return mContentView;
     }
@@ -157,12 +163,15 @@ public class DeviceDetailFragment extends Fragment implements ConnectionInfoList
         // server. The file server is single threaded, single connection server
         // socket.
         if (info.groupFormed && info.isGroupOwner) {
-            new FileServerAsyncTask(getActivity(), mContentView.findViewById(R.id.status_text))
-                    .execute();
+//            new FileServerAsyncTask(getActivity(), mContentView.findViewById(R.id.status_text))
+//                    .execute();
+            mContentView.findViewById(R.id.btn_start_client).setVisibility(View.VISIBLE);
+            mContentView.findViewById(R.id.btn_start_chat).setVisibility(View.VISIBLE);
         } else if (info.groupFormed) {
             // The other device acts as the client. In this case, we enable the
             // get file button.
             mContentView.findViewById(R.id.btn_start_client).setVisibility(View.VISIBLE);
+            mContentView.findViewById(R.id.btn_start_chat).setVisibility(View.VISIBLE);
             ((TextView) mContentView.findViewById(R.id.status_text)).setText(getResources()
                     .getString(R.string.client_text));
         }
@@ -200,6 +209,7 @@ public class DeviceDetailFragment extends Fragment implements ConnectionInfoList
         view = (TextView) mContentView.findViewById(R.id.status_text);
         view.setText(R.string.empty);
         mContentView.findViewById(R.id.btn_start_client).setVisibility(View.GONE);
+        mContentView.findViewById(R.id.btn_start_chat).setVisibility(View.GONE);
         this.getView().setVisibility(View.GONE);
     }
 
