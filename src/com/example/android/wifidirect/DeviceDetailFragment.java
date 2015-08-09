@@ -29,6 +29,7 @@ import android.net.wifi.p2p.WifiP2pManager.ConnectionInfoListener;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.Message;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -37,11 +38,15 @@ import android.widget.TextView;
 
 import com.example.android.wifidirect.DeviceListFragment.DeviceActionListener;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.OutputStream;
+import java.io.OutputStreamWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
 
@@ -167,6 +172,7 @@ public class DeviceDetailFragment extends Fragment implements ConnectionInfoList
 //                    .execute();
             mContentView.findViewById(R.id.btn_start_client).setVisibility(View.VISIBLE);
             mContentView.findViewById(R.id.btn_start_chat).setVisibility(View.VISIBLE);
+            serverInit();
         } else if (info.groupFormed) {
             // The other device acts as the client. In this case, we enable the
             // get file button.
@@ -302,4 +308,36 @@ public class DeviceDetailFragment extends Fragment implements ConnectionInfoList
         return true;
     }
 
+
+
+
+    public void serverInit(){
+        new Thread(){
+            BufferedWriter writer = null;
+            BufferedReader reader = null;
+            String line;
+            @Override
+            public void run() {
+                super.run();
+            try {
+                    ServerSocket serverSocket = new ServerSocket(8988);
+                    Socket socket = serverSocket.accept();
+                    writer = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
+                    reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+                }catch (IOException e) {
+                    e.printStackTrace();
+                }
+                try{
+                    while ((line = reader.readLine())!=null){
+                        Message msg = new Message();
+                        msg.obj = line;
+                        ChatActivity.handler.sendMessage(msg);
+                    }
+                    reader.close();
+                }catch (IOException e){
+                    e.printStackTrace();
+                }
+
+    }}.start();
+}
 }

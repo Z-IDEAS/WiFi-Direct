@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.net.wifi.p2p.WifiP2pInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -22,20 +24,27 @@ import java.net.Socket;
 public class ChatActivity extends Activity {
     private WifiP2pInfo info;
     private EditText ChatEdit;
-    public  TextView ChatText;
+    private   TextView ChatText;
+    public static Handler handler;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat);
+        handler = new  Handler(){
+            @Override
+            public void handleMessage(Message msg) {
+                super.handleMessage(msg);
+                String s = (String) msg.obj;
+                ChatText.append(s+"\n");
+            }
+        };
         ChatEdit = (EditText) findViewById(R.id.ChatEdit);
         ChatText = (TextView) findViewById(R.id.ChatText);
         info =(WifiP2pInfo) getIntent().getParcelableExtra("info");
         if(!info.isGroupOwner) {
             clientInit();
         }
-        else{
-            serverInit();
-        }
+//
         findViewById(R.id.ChatSend).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
