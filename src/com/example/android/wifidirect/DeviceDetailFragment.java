@@ -121,13 +121,15 @@ public class DeviceDetailFragment extends Fragment implements ConnectionInfoList
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), ChatActivity.class);
                 intent.putExtra("info", info);
+                intent.putExtra("init",init);
+                init = false;
                 startActivity(intent);
             }
         });
 
         return mContentView;
     }
-
+    boolean init = true;
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
 
@@ -310,15 +312,13 @@ public class DeviceDetailFragment extends Fragment implements ConnectionInfoList
 
 
 
-
+    static volatile BufferedWriter  writer = null;
+    static volatile BufferedReader reader = null;
     public void serverInit(){
-        new Thread(){
-            BufferedWriter writer = null;
-            BufferedReader reader = null;
-            String line;
+        new Thread(new Runnable() {
             @Override
             public void run() {
-                super.run();
+            String line;
             try {
                     ServerSocket serverSocket = new ServerSocket(8988);
                     Socket socket = serverSocket.accept();
@@ -331,13 +331,13 @@ public class DeviceDetailFragment extends Fragment implements ConnectionInfoList
                     while ((line = reader.readLine())!=null){
                         Message msg = new Message();
                         msg.obj = line;
-                        ChatActivity.handler.sendMessage(msg);
+                        ChatActivity.handler1.sendMessage(msg);
                     }
                     reader.close();
                 }catch (IOException e){
                     e.printStackTrace();
                 }
 
-    }}.start();
+    }}).start();
 }
 }
