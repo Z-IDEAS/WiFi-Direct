@@ -314,6 +314,7 @@ public class DeviceDetailFragment extends Fragment implements ConnectionInfoList
 
     static volatile BufferedWriter  writer = null;
     static volatile BufferedReader reader = null;
+    static  Socket socket =null;
     public void serverInit(){
         new Thread(new Runnable() {
             @Override
