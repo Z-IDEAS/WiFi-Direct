@@ -30,6 +30,13 @@ public class ChatActivity extends Activity {
     public static Handler handler1,handler2,handler3;
     IntentFilter intentFilter;
     BroadcastReceiver broadcastReceiver;
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        unregisterReceiver(broadcastReceiver);
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -76,6 +83,10 @@ public class ChatActivity extends Activity {
             }
         });
     }
+//    public void onPause() {
+//        super.onPause();
+//        unregisterReceiver(broadcastReceiver);
+//    }
     Socket socket = null;
     public void clientInit(){
         new Thread(new Runnable() {
@@ -83,7 +94,7 @@ public class ChatActivity extends Activity {
             public void run() {
                 String line = null;
                 try {
-                    socket = new Socket(info.groupOwnerAddress.getHostAddress(),8988);
+                    socket = new Socket(info.groupOwnerAddress.getHostAddress(),12345);
                     DeviceDetailFragment.writer = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
                     DeviceDetailFragment.reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
                 }catch (IOException e) {
@@ -113,7 +124,7 @@ public class ChatActivity extends Activity {
                 public void run() {
                     String line = null;
                     try {
-                        online = new Socket("117.88.157.96",10000);
+                        online = new Socket("192.168.1.104",10000);
                         olwriter = new BufferedWriter(new OutputStreamWriter(online.getOutputStream()));
                         olreader = new BufferedReader(new InputStreamReader(online.getInputStream()));
                     }catch (IOException e) {

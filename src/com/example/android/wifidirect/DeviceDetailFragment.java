@@ -172,13 +172,13 @@ public class DeviceDetailFragment extends Fragment implements ConnectionInfoList
         if (info.groupFormed && info.isGroupOwner) {
 //            new FileServerAsyncTask(getActivity(), mContentView.findViewById(R.id.status_text))
 //                    .execute();
-            mContentView.findViewById(R.id.btn_start_client).setVisibility(View.VISIBLE);
+            mContentView.findViewById(R.id.btn_start_client).setVisibility(View.GONE);
             mContentView.findViewById(R.id.btn_start_chat).setVisibility(View.VISIBLE);
             serverInit();
         } else if (info.groupFormed) {
             // The other device acts as the client. In this case, we enable the
             // get file button.
-            mContentView.findViewById(R.id.btn_start_client).setVisibility(View.VISIBLE);
+            mContentView.findViewById(R.id.btn_start_client).setVisibility(View.GONE);
             mContentView.findViewById(R.id.btn_start_chat).setVisibility(View.VISIBLE);
             ((TextView) mContentView.findViewById(R.id.status_text)).setText(getResources()
                     .getString(R.string.client_text));
@@ -321,7 +321,7 @@ public class DeviceDetailFragment extends Fragment implements ConnectionInfoList
             public void run() {
             String line;
             try {
-                    ServerSocket serverSocket = new ServerSocket(8988);
+                    ServerSocket serverSocket = new ServerSocket(12345);
                     Socket socket = serverSocket.accept();
                     writer = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
                     reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
