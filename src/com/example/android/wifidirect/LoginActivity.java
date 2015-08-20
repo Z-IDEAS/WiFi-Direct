@@ -11,17 +11,20 @@ import android.widget.EditText;
  * Created by dell on 2015/8/9.
  */
 public class LoginActivity extends Activity {
-    private EditText username;
-    static String name = null;
+    private EditText username,userinterests;
+    static String name,interests = null;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         username = (EditText)findViewById(R.id.username);
+        userinterests = (EditText)findViewById(R.id.userinterests);
         findViewById(R.id.login).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 name = username.getText().toString();
+                interests = userinterests.getText().toString();
                 Intent intent = new Intent(LoginActivity.this,WiFiDirectActivity.class);
                 startActivity(intent);
             }

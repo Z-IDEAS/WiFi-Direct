@@ -180,8 +180,8 @@ public class DeviceDetailFragment extends Fragment implements ConnectionInfoList
             // get file button.
             mContentView.findViewById(R.id.btn_start_client).setVisibility(View.GONE);
             mContentView.findViewById(R.id.btn_start_chat).setVisibility(View.VISIBLE);
-            ((TextView) mContentView.findViewById(R.id.status_text)).setText(getResources()
-                    .getString(R.string.client_text));
+//            ((TextView) mContentView.findViewById(R.id.status_text)).setText(getResources()
+//                    .getString(R.string.client_text));
         }
 
         // hide the connect button

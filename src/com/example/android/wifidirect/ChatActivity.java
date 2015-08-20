@@ -35,6 +35,11 @@ public class ChatActivity extends Activity {
     protected void onDestroy() {
         super.onDestroy();
         unregisterReceiver(broadcastReceiver);
+        try {
+            online.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -52,11 +57,12 @@ public class ChatActivity extends Activity {
         handler3 = new myHandler();
         boolean a = getIntent().getBooleanExtra("init",false);
         info =(WifiP2pInfo) getIntent().getParcelableExtra("info");
+        onlineconnect();
                 if (getIntent().getBooleanExtra("init",false)){
-                    onlineconnect();
                     if(!info.isGroupOwner){
                     clientInit();
-                }}
+                    }
+                }
         onlinetag=false;
         findViewById(R.id.ChatSend).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -124,7 +130,7 @@ public class ChatActivity extends Activity {
                 public void run() {
                     String line = null;
                     try {
-                        online = new Socket("192.168.1.104",10000);
+                        online = new Socket("192.168.137.1",10000);
                         olwriter = new BufferedWriter(new OutputStreamWriter(online.getOutputStream()));
                         olreader = new BufferedReader(new InputStreamReader(online.getInputStream()));
                     }catch (IOException e) {
@@ -136,7 +142,6 @@ public class ChatActivity extends Activity {
                             msg.obj = line;
                             handler3.sendMessage(msg);
                         }
-                        olreader.close();
                     }catch (IOException e){
                         e.printStackTrace();
                     }

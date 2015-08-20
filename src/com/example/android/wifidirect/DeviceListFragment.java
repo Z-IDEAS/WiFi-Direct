@@ -127,10 +127,15 @@ public class DeviceListFragment extends ListFragment implements PeerListListener
                 TextView top = (TextView) v.findViewById(R.id.device_name);
                 TextView bottom = (TextView) v.findViewById(R.id.device_details);
                 if (top != null) {
-                    top.setText(device.deviceName);
+                    top.setText(device.deviceName.substring(0,10));
                 }
                 if (bottom != null) {
-                    bottom.setText(getDeviceStatus(device.status));
+                    if(device.deviceName.substring(10).equals(LoginActivity.interests)){
+                    bottom.setText(getDeviceStatus(device.status)+" "+"Common interests:"+LoginActivity.interests);
+                    }
+                    else{
+                        bottom.setText(getDeviceStatus(device.status)+"   "+"No common interests");
+                    }
                 }
             }
 
@@ -147,7 +152,7 @@ public class DeviceListFragment extends ListFragment implements PeerListListener
     public void updateThisDevice(WifiP2pDevice device) {
         this.device = device;
         TextView view = (TextView) mContentView.findViewById(R.id.my_name);
-        view.setText(device.deviceName);
+        view.setText(device.deviceName.substring(0,10));
         view = (TextView) mContentView.findViewById(R.id.my_status);
         view.setText(getDeviceStatus(device.status));
     }
